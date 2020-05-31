@@ -114,7 +114,6 @@
       "number-literal-format": true,
       "object-curly-spacing": [true, "always", { "objectsInObjects": false }],
       "object-literal-key-quotes": [true, "as-needed"],
-      "object-literal-shorthand": [true, "never"],
       "one-line": [
         true,
         "check-open-brace",
@@ -125,9 +124,9 @@
       "ordered-imports": [
         true,
         {
-          "import-sources-order": "case-insensitive",
+          "import-sources-order": "any",
           "module-source-path": "full",
-          "named-imports-order": "case-insensitive",
+          "named-imports-order": "any",
           "grouped-imports": true,
           "groups": [
             { "name": "local files", "match": "^\\.", "order": 20 },
