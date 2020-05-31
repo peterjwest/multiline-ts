@@ -26,7 +26,6 @@
   "scripts": {
     "audit-dependencies": "yarn audit; [[ $? -ge 4 ]] && exit 1 || exit 0",
     "build": "tsc --project tsconfig.json",
-    "lint:markdown": "markdownlint 'docs/**/*.md' '*.md'",
     "lint:ts": "tslint --format verbose --project tsconfig.json",
     "test:coverage": "rm -rf coverage && NODE_DEBUG=nyc nyc mocha --require ts-node/register 'tests/**/*.ts'",
     "test:unit": "mocha --require ts-node/register 'tests/**/*.ts'"
@@ -35,7 +34,6 @@
   "devDependencies": {
     "@types/mocha": "5.2.7",
     "@types/node": "^14.0.6",
-    "markdownlint-cli": "0.18.0",
     "mocha": "^6.1.4",
     "mocha-circleci-reporter": "^0.0.3",
     "nyc": "14.1.1",
