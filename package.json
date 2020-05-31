@@ -27,7 +27,7 @@
     "audit-dependencies": "yarn audit; [[ $? -ge 4 ]] && exit 1 || exit 0",
     "build": "tsc --project tsconfig.json",
     "lint:ts": "tslint --format verbose --project tsconfig.json",
-    "test:coverage": "rm -rf coverage && NODE_DEBUG=nyc nyc mocha --require ts-node/register 'tests/**/*.ts'",
+    "test:coverage": "rm -rf coverage && NODE_DEBUG=nyc nyc mocha 'tests/**/*.ts'",
     "test:unit": "mocha --require ts-node/register 'tests/**/*.ts'"
   },
   "dependencies": {},
