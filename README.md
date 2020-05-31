@@ -1,4 +1,4 @@
-# multiline-ts
+# multiline-ts [![npm version][npm-badge]][npm-url] [![build status][circle-badge]][circle-url] [![coverage status][coverage-badge]][coverage-url]
 
 Readable multi-line template strings for Javascript or Typescript.
 
@@ -97,3 +97,13 @@ Another string
 - Tab/mixed indent support
 - Relative offset
 - Function support
+
+
+[npm-badge]: https://badge.fury.io/js/multiline-ts.svg
+[npm-url]: https://www.npmjs.com/package/multiline-ts
+
+[circle-badge]: https://circleci.com/gh/peterjwest/multiline-ts.svg?style=shield
+[circle-url]: https://circleci.com/gh/peterjwest/multiline-ts
+
+[coverage-badge]: https://coveralls.io/repos/peterjwest/multiline-ts/badge.svg?branch=master&service=github
+[coverage-url]: https://coveralls.io/github/peterjwest/multiline-ts?branch=master
