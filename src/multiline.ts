@@ -26,8 +26,11 @@ function getFinalIndent(value: string) {
  * also indents each line of template variables.
  * See unit tests for examples
  */
-export default function multiline(strings: TemplateStringsArray, ...inputs: string[]) {
+ export default function multiline(value: TemplateStringsArray | string, ...inputs: string[]) {
   let currentIndent = '';
+
+  const strings = typeof value === 'string' ? value.split(/(?=\r\n|\r|\n)/) : value.map((value) => value);
+
   // Iterate through each string and append input value to it, indenting if needed
   const lines = strings.map((value, i) => {
     // Compute current indent level from string

@@ -146,4 +146,18 @@ foo
         ${zim}: ${zig}
     `, expectedString);
   }));
+
+  it('Returns a string indented correctly when called as a function', (() => {
+    const expectedString = [
+      'foo',
+      '  bar',
+      '    zim',
+    ].join('\n');
+
+    assert.strictEqual(multiline(`
+      foo
+        bar
+          zim
+    `), expectedString);
+  }));
 });
