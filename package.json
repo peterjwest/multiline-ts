@@ -1,8 +1,8 @@
 {
   "name": "multiline-ts",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Readable multiline template strings",
-  "main": "build/multiline-ts.js",
+  "main": "build/multiline.js",
   "repository": {
     "type": "git",
     "url": "git@github.com:peterjwest/multiline-ts.git"
