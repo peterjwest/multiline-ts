@@ -1,0 +1,7 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [],
+  "files": [
+    "src/multiline.ts"
+  ]
+}
