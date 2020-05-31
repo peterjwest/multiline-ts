@@ -1,0 +1,49 @@
+{
+  "name": "multiline-ts",
+  "version": "0.1.0",
+  "description": "Readable multiline template strings",
+  "main": "build/multiline-ts.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:peterjwest/multiline-ts.git"
+  },
+  "files": [
+    "/build"
+  ],
+  "author": "Peter West",
+  "bugs": {
+    "url": "https://github.com/peterjwest/multiline-ts/issues"
+  },
+  "keywords": [
+    "string",
+    "multline",
+    "dedent",
+    "deindent",
+    "es6"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/peterjwest/multiline-ts#readme",
+  "scripts": {
+    "audit-dependencies": "yarn audit; [[ $? -ge 4 ]] && exit 1 || exit 0",
+    "build": "tsc --project tsconfig.json",
+    "lint:markdown": "markdownlint 'docs/**/*.md' '*.md'",
+    "lint:ts": "tslint --format verbose --project tsconfig.json",
+    "test:coverage": "rm -rf coverage && NODE_DEBUG=nyc nyc mocha --require ts-node/register 'tests/**/*.ts'",
+    "test:unit": "mocha --require ts-node/register 'tests/**/*.ts'"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/mocha": "5.2.7",
+    "@types/node": "^14.0.6",
+    "markdownlint-cli": "0.18.0",
+    "mocha": "^6.1.4",
+    "mocha-circleci-reporter": "^0.0.3",
+    "nyc": "14.1.1",
+    "sinon": "7.5.0",
+    "ts-node": "8.4.1",
+    "tslint": "5.20.0",
+    "tslint-eslint-rules": "5.4.0",
+    "typescript": "3.5.2",
+    "typescript-tslint-plugin": "0.5.4"
+  }
+}
