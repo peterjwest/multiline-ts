@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  coveralls: coveralls/coveralls@1.0.6
+
 references:
   yarn-cache-key-latest: &yarn-cache-key-latest
     v1-dependency-yarn-{{ .Branch }}-{{ checksum "yarn.lock" }}-latest
@@ -129,6 +132,7 @@ jobs:
       - checkout
       - install-dependencies
       - tests
+      - coveralls/upload
 
   checks-latest:
     docker:
