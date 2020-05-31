@@ -31,11 +31,17 @@ const string = multiline`
 Is equivalent to:
 
 ```js
-const string = [
-  'Multiline string\n',
-  '  with varying\n',
-  '    indentation',
-].join('');
+const string = `Multiline string
+  with varying
+    indentation`;
+```
+
+Which creates the string:
+
+```
+Multiline string
+  with varying
+    indentation
 ```
 
 ### With template variables
@@ -54,12 +60,10 @@ const string = multiline`
 Is equivalent to:
 
 ```js
-const string = [
-  'Indented value:\n',
-  '  1\n',
-  '  2\n',
-  '  3',
-].join('');
+const string = `Indented value:
+  1
+  2
+  3`;
 ```
 
 ### With with extra newlines
@@ -81,13 +85,11 @@ const string = multiline`
 Is equivalent to:
 
 ```js
-const string = [
-  '\n',
-  '  Here is\n',
-  'Another string\n',
-  '    For you\n',
-  '\n',
-].join('');
+const string = `
+  Here is
+Another string
+    For you
+`;
 ```
 
 ### TODO:
