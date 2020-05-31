@@ -1,4 +1,5 @@
 import * as assert from 'assert';
+
 import multiline from '../src/multiline';
 
 describe('utils/multiline', () => {

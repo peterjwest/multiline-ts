@@ -26,7 +26,7 @@ function getFinalIndent(value: string) {
  * also indents each line of template variables.
  * See unit tests for examples
  */
- export default function multiline(value: TemplateStringsArray | string, ...inputs: string[]) {
+export default function multiline(value: TemplateStringsArray | string, ...inputs: string[]) {
   let currentIndent = '';
 
   const strings = typeof value === 'string' ? value.split(/(?=\r\n|\r|\n)/) : value.map((value) => value);
@@ -44,7 +44,7 @@ function getFinalIndent(value: string) {
   // Find the minimum common indent
   const minIndent = minimum(
     lines.filter((line) => Boolean(line.match(/[^ \t]/)))
-    .map((line) => getIndent(line).length)
+    .map((line) => getIndent(line).length),
   );
 
   // Remove common indent from all lines, and start/end newline
