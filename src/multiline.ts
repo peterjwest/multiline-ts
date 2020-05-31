@@ -48,5 +48,5 @@ function getFinalIndent(value: string) {
   );
 
   // Remove common indent from all lines, and start/end newline
-  return lines.map((line) => line.slice(minIndent)).join('\n').replace(/^\n|\n *$/g, '');
+  return lines.map((line) => line.slice(minIndent)).join('\n').replace(/^\n|\n[ \t]*$/g, '');
 }
