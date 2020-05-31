@@ -1,0 +1,231 @@
+version: 2.1
+
+references:
+  yarn-cache-key-latest: &yarn-cache-key-latest
+    v1-dependency-yarn-{{ .Branch }}-{{ checksum "yarn.lock" }}-latest
+  yarn-cache-key: &yarn-cache-key
+    v1-dependency-yarn-{{ .Branch }}-{{ checksum "yarn.lock" }}
+  yarn-backup-cache-key: &yarn-backup-cache-key
+    v1-dependency-yarn-{{ .Branch }}-
+  yarn-backup-cache-key-no-branch: &yarn-backup-cache-key-no-branch
+    v1-dependency-yarn-
+  node-8: &node-8
+    circleci/node:8.17.0
+  node-10: &node-10
+    circleci/node:10.17.0
+  node-12: &node-12
+    circleci/node:12.13.0
+  node-14: &node-14
+    circleci/node:14.3.0
+  node-8-latest: &node-8
+    circleci/node:8
+  node-10-latest: &node-10
+    circleci/node:10
+  node-12-latest: &node-12
+    circleci/node:12
+  node-14-latest: &node-14
+    circleci/node:14
+
+commands:
+  install-dependencies:
+    steps:
+      - run:
+          name: Yarn version
+          command: yarn --version
+      - restore_cache:
+          keys:
+            - *yarn-cache-key
+            - *yarn-backup-cache-key
+            - *yarn-backup-cache-key-no-branch
+      - run:
+          name: Install dependencies
+          command: yarn install --frozen-lockfile
+      - save_cache:
+          name: Save yarn package cache
+          key: *yarn-cache-key
+          paths:
+            - ~/.cache/yarn
+
+  install-dependencies-latest:
+    steps:
+      - run:
+          name: Yarn version
+          command: yarn --version
+      - restore_cache:
+          keys:
+            - *yarn-cache-key-latest
+            - *yarn-cache-key
+            - *yarn-backup-cache-key
+            - *yarn-backup-cache-key-no-branch
+      - run:
+          name: Upgrade dependencies lockfile and install
+          command: yarn upgrade
+      - run:
+          name: Output dependencies diff
+          command: git --no-pager diff
+      - save_cache:
+          name: Save yarn package cache
+          key: *yarn-cache-key-latest
+          paths:
+            - ~/.cache/yarn
+
+  checks:
+    steps:
+      - run:
+          name: Lint Typescript code
+          command: yarn lint:ts
+      - run:
+          name: Audit production dependencies
+          command: yarn audit-dependencies
+
+  tests:
+    steps:
+      - run:
+          name: Unit tests
+          command: yarn test-coverage --forbid-only --forbid-pending --reporter mocha-circleci-reporter --reporter-options mochaFile=~/test-results/mocha/results.xml
+      - run:
+          name: Integration tests
+          command: yarn test-integration --forbid-only --forbid-pending --reporter mocha-circleci-reporter --reporter-options mochaFile=~/test-results/mocha-integration/results.xml
+      - store_artifacts:
+          path: coverage
+      - store_test_results:
+          path: ~/test-results/
+
+
+  deploy:
+    steps:
+      - run:
+          name: Build project
+          command: yarn build
+      - run:
+          name: Publish package
+          command: yarn publish-package
+      - run:
+          name: Create git tag
+          command: yarn create-release-tag
+      - run:
+          name: Create a pull request from the release back to develop
+          command: yarn create-post-release-pull-request 'ryanbarwick,adamkowalczyk,JimmehAH'
+
+jobs:
+  checks:
+    docker:
+      - image: *node-10
+    steps:
+      - checkout
+      - install-dependencies
+      - checks
+
+  test-node-8:
+    docker:
+      - image: *node-8
+    steps:
+      - checkout
+      - install-dependencies
+      - tests
+
+  test-node-10:
+    docker:
+      - image: *node-10
+    steps:
+      - checkout
+      - install-dependencies
+      - tests
+
+  test-node-12:
+    docker:
+      - image: *node-12
+    steps:
+      - checkout
+      - install-dependencies
+      - tests
+
+  test-node-14:
+    docker:
+      - image: *node-14
+    steps:
+      - checkout
+      - install-dependencies
+      - tests
+
+  deploy:
+    docker:
+      - image: *node-10
+    steps:
+      - checkout
+      - install-dependencies
+      - install-hub
+      - git-config
+      - deploy
+
+  checks-latest:
+    docker:
+      - image: *node-10
+    steps:
+      - checkout
+      - install-dependencies-latest
+      - checks
+
+  test-node-8-latest:
+    docker:
+      - image: *node-8-latest
+    steps:
+      - checkout
+      - install-dependencies-latest
+      - tests
+
+  test-node-10-latest:
+    docker:
+      - image: *node-10-latest
+    steps:
+      - checkout
+      - install-dependencies-latest
+      - tests
+
+  test-node-12-latest:
+    docker:
+      - image: *node-12-latest
+    steps:
+      - checkout
+      - install-dependencies-latest
+      - tests
+
+  test-node-14-latest:
+    docker:
+      - image: *node-14-latest
+    steps:
+      - checkout
+      - install-dependencies-latest
+      - tests
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - checks
+      - test-node-8
+      - test-node-10
+      - test-node-12
+      - test-node-14
+      - deploy:
+          requires: [checks, test-node-8, test-node-10, test-node-12]
+          filters:
+            branches:
+              only: master
+
+  nightly:
+    jobs:
+      - checks-latest
+      - test-node-8-latest
+      - test-node-10-latest
+      - test-node-12-latest
+      - test-node-14-latest
+    triggers:
+      - schedule:
+          # Nightly at midnight
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - master
+                - develop
