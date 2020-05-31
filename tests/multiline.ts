@@ -30,6 +30,38 @@ foo
 `, expectedString);
   }));
 
+  it('Returns a string indented correctly with tabs', (() => {
+    const expectedString = [
+      'foo',
+      '\tbar',
+      '',
+      '\t\tzim',
+    ].join('\n');
+
+    assert.strictEqual(multiline`
+\t\t\tfoo
+\t\t\t\tbar
+
+\t\t\t\t\tzim
+    `, expectedString);
+  }));
+
+  it('Returns a string indented correctly with mixed tabs and spaces, you monster', (() => {
+    const expectedString = [
+      'foo',
+      '',
+      '\tbar',
+      '\t\tzim',
+    ].join('\n');
+
+    assert.strictEqual(multiline`
+      \tfoo
+      \t
+      \t\tbar
+      \t\t\tzim
+    `, expectedString);
+  }));
+
   it('Returns a string with extra trailing newlines', (() => {
     const expectedString = [
       'foo',

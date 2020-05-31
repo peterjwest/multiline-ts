@@ -94,7 +94,6 @@ Another string
 
 ### TODO:
 
-- Tab/mixed indent support
 - Relative offset
 - Function support
 

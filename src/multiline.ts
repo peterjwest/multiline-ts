@@ -11,13 +11,13 @@ function minimum(array: number[]) {
 
 /** Gets the indent (in spaces) of a line */
 function getIndent(line: string) {
-  const match = line.match(/^ +/);
+  const match = line.match(/^[ \t]+/);
   return match ? match[0] : '';
 }
 
 /** Gets the indent (in spaces) at the end of a string */
 function getFinalIndent(value: string) {
-  const match = value.match(/(?<=(\r\n|\r|\n)) +$/);
+  const match = value.match(/(?<=(\r\n|\r|\n))[ \t]+$/);
   return match ? match[0] : '';
 }
 
@@ -40,7 +40,7 @@ export default function multiline(strings: TemplateStringsArray, ...inputs: stri
 
   // Find the minimum common indent
   const minIndent = minimum(
-    lines.filter((line) => Boolean(line.match(/[^ ]/)))
+    lines.filter((line) => Boolean(line.match(/[^ \t]/)))
     .map((line) => getIndent(line).length)
   );
 
