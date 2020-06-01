@@ -4,6 +4,9 @@
   "description": "Readable multiline template strings",
   "type": "module",
   "main": "./build/es5/multiline.cjs",
+  "engines": {
+    "node": ">=8"
+  },
   "exports": {
     "import": "./build/multiline.js",
     "require": "./build/es5/multiline.cjs"
