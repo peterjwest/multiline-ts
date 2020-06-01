@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "build/",
+    "outDir": "build",
     "target": "es2016",
     "lib": ["es2018"],
     "declaration": true,
@@ -14,7 +14,8 @@
     "strictNullChecks": true,
     "strictBindCallApply": true,
     "alwaysStrict": true,
-    "baseUrl": "."
+    "baseUrl": ".",
+    "esModuleInterop": true
   },
   "include": [
     "src/**/*.ts",

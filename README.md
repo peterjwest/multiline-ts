@@ -92,6 +92,14 @@ Another string
 `;
 ```
 
+### With CommonJS / require()
+
+If you want to use this with CommonJS imports use the following syntax:
+
+```js
+const multiline = require('multiline-ts').default;
+```
+
 ### As a function
 
 You can also call multiline as a normal function, however this will not be able to indent template variables.

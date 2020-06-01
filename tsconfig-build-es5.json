@@ -5,6 +5,7 @@
     "src/multiline.ts"
   ],
   "compilerOptions": {
-    "module": "es6",
+    "outDir": "build/es5",
+    "module": "commonjs",
   }
 }

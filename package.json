@@ -2,7 +2,12 @@
   "name": "multiline-ts",
   "version": "1.0.0",
   "description": "Readable multiline template strings",
-  "main": "build/multiline.js",
+  "type": "module",
+  "main": "./build/es5/multiline.cjs",
+  "exports": {
+    "import": "./build/multiline.js",
+    "require": "./build/es5/multiline.cjs"
+  },
   "repository": {
     "type": "git",
     "url": "git@github.com:peterjwest/multiline-ts.git"
@@ -25,7 +30,9 @@
   "homepage": "https://github.com/peterjwest/multiline-ts#readme",
   "scripts": {
     "audit-dependencies": "yarn audit; [[ $? -ge 4 ]] && exit 1 || exit 0",
-    "build": "tsc --project tsconfig-build.json",
+    "build": "yarn build:es6 && yarn build:es5",
+    "build:es6": "tsc --project tsconfig-build.json",
+    "build:es5": "rm -rf build/es5 && tsc --project tsconfig-build-es5.json && renamer --find .js --replace .cjs build/es5/**",
     "lint:ts": "tslint --format verbose --project tsconfig.json",
     "test:coverage": "rm -rf coverage && NODE_DEBUG=nyc nyc mocha 'tests/**/*.ts'",
     "test:unit": "mocha --require ts-node/register 'tests/**/*.ts'"
@@ -37,6 +44,7 @@
     "mocha": "^6.1.4",
     "mocha-circleci-reporter": "^0.0.3",
     "nyc": "14.1.1",
+    "renamer": "^2.0.0",
     "sinon": "7.5.0",
     "ts-node": "8.4.1",
     "tslint": "5.20.0",
