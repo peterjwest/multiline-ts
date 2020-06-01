@@ -122,11 +122,6 @@ const string = `Multiline string
     indentation`;
 ```
 
-### TODO:
-
-- Relative offset
-- Function support
-
 
 [npm-badge]: https://badge.fury.io/js/multiline-ts.svg
 [npm-url]: https://www.npmjs.com/package/multiline-ts
