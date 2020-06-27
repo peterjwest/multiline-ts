@@ -1,6 +1,6 @@
-import * as assert from 'assert';
+import assert from 'assert';
 
-import multiline from '../src/multiline';
+import multiline from '../src/index';
 
 describe('utils/multiline', () => {
   it('Returns a string indented correctly without leading/trailing newline', (() => {

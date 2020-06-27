@@ -2,14 +2,13 @@
   "name": "multiline-ts",
   "version": "1.1.1",
   "description": "Readable multiline template strings",
-  "type": "module",
-  "main": "./build/es5/multiline.cjs",
-  "engines": {
-    "node": ">=8"
-  },
+  "main": "./build/wrapper.js",
   "exports": {
-    "import": "./build/multiline.js",
-    "require": "./build/es5/multiline.cjs"
+    "import": "./build/es6/index.mjs",
+    "require": "./build/wrapper.js"
+  },
+  "engines": {
+    "node": ">=10"
   },
   "repository": {
     "type": "git",
@@ -34,17 +33,19 @@
   "scripts": {
     "audit-dependencies": "yarn audit; [[ $? -ge 4 ]] && exit 1 || exit 0",
     "build": "yarn build:es6 && yarn build:es5",
-    "build:es6": "tsc --project tsconfig-build.json",
+    "build:es6": "rm -rf build/es6 && tsc --project tsconfig-build-es6.json && renamer --find .js --replace .mjs build/es6/**",
     "build:es5": "rm -rf build/es5 && tsc --project tsconfig-build-es5.json && renamer --find .js --replace .cjs build/es5/**",
     "lint:ts": "tslint --format verbose --project tsconfig.json",
     "test:coverage": "rm -rf coverage && NODE_DEBUG=nyc nyc mocha 'tests/**/*.ts'",
-    "test:unit": "mocha --require ts-node/register 'tests/**/*.ts'"
+    "test:unit": "mocha --require ts-node/register 'tests/**/*.ts'",
+    "test:unit:es5": "mocha 'tests/*.cjs'",
+    "test:unit:es6": "mocha 'tests/*.mjs'"
   },
   "dependencies": {},
   "devDependencies": {
     "@types/mocha": "5.2.7",
     "@types/node": "^14.0.6",
-    "mocha": "^6.1.4",
+    "mocha": "^8.0.1",
     "mocha-circleci-reporter": "^0.0.3",
     "nyc": "14.1.1",
     "renamer": "1.1.4",

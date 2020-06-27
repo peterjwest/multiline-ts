@@ -2,7 +2,7 @@
   "extends": "./tsconfig.json",
   "include": [],
   "files": [
-    "src/multiline.ts"
+    "src/index.ts"
   ],
   "compilerOptions": {
     "outDir": "build/es5",

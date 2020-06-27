@@ -12,16 +12,12 @@ references:
     v1-dependency-yarn-{{ .Branch }}-
   yarn-backup-cache-key-no-branch: &yarn-backup-cache-key-no-branch
     v1-dependency-yarn-
-  node-8: &node-8
-    circleci/node:8.17.0
   node-10: &node-10
-    circleci/node:10.17.0
+    circleci/node:10.19.0
   node-12: &node-12
-    circleci/node:12.13.0
+    circleci/node:12.18.0
   node-14: &node-14
-    circleci/node:14.3.0
-  node-8-latest: &node-8-latest
-    circleci/node:8
+    circleci/node:14.4.0
   node-10-latest: &node-10-latest
     circleci/node:10
   node-12-latest: &node-12-latest
@@ -81,33 +77,42 @@ commands:
           name: Audit production dependencies
           command: yarn audit-dependencies
 
+  build:
+    steps:
+      - run:
+          name: Build project
+          command: yarn build
+
   tests:
     steps:
       - run:
-          name: Unit tests
+          name: TS Unit tests
           command: yarn test:coverage
       - store_artifacts:
           path: coverage
       - store_test_results:
           path: ~/test-results/
 
+  tests-es5:
+    steps:
+      - run:
+          name: ES5 Unit tests
+          command: yarn test:unit:es5
+
+  tests-es6:
+    steps:
+      - run:
+          name: ES6 Unit tests
+          command: yarn test:unit:es6
 
 jobs:
   checks:
     docker:
-      - image: *node-10
+      - image: *node-14
     steps:
       - checkout
       - install-dependencies
       - checks
-
-  test-node-8:
-    docker:
-      - image: *node-8
-    steps:
-      - checkout
-      - install-dependencies
-      - tests
 
   test-node-10:
     docker:
@@ -115,7 +120,9 @@ jobs:
     steps:
       - checkout
       - install-dependencies
+      - build
       - tests
+      - tests-es5
 
   test-node-12:
     docker:
@@ -123,7 +130,10 @@ jobs:
     steps:
       - checkout
       - install-dependencies
+      - build
       - tests
+      - tests-es5
+      - tests-es6
 
   test-node-14:
     docker:
@@ -131,24 +141,19 @@ jobs:
     steps:
       - checkout
       - install-dependencies
+      - build
       - tests
+      - tests-es5
+      - tests-es6
       - coveralls/upload
 
   checks-latest:
     docker:
-      - image: *node-10
+      - image: *node-14
     steps:
       - checkout
       - install-dependencies-latest
       - checks
-
-  test-node-8-latest:
-    docker:
-      - image: *node-8-latest
-    steps:
-      - checkout
-      - install-dependencies-latest
-      - tests
 
   test-node-10-latest:
     docker:
@@ -156,7 +161,9 @@ jobs:
     steps:
       - checkout
       - install-dependencies-latest
+      - build
       - tests
+      - tests-es5
 
   test-node-12-latest:
     docker:
@@ -164,7 +171,9 @@ jobs:
     steps:
       - checkout
       - install-dependencies-latest
+      - build
       - tests
+      - tests-es5
 
   test-node-14-latest:
     docker:
@@ -172,14 +181,16 @@ jobs:
     steps:
       - checkout
       - install-dependencies-latest
+      - build
       - tests
+      - tests-es5
+      - tests-es6
 
 workflows:
   version: 2
   test:
     jobs:
       - checks
-      - test-node-8
       - test-node-10
       - test-node-12
       - test-node-14
@@ -187,7 +198,6 @@ workflows:
   nightly:
     jobs:
       - checks-latest
-      - test-node-8-latest
       - test-node-10-latest
       - test-node-12-latest
       - test-node-14-latest
