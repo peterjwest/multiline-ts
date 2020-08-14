@@ -3,3 +3,6 @@
 /build/es6
 /.nyc_output
 /coverage
+/tests/snippets/*
+!/tests/snippets/config.json
+!/tests/snippets/tsconfig.json

@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "lib": ["es2018"],
+    "module": "commonjs",
+    "baseUrl": ".",
+    "declaration": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true
+  }
+}

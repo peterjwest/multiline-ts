@@ -88,6 +88,9 @@ commands:
       - run:
           name: TS Unit tests
           command: yarn test:coverage
+      - run:
+          name: Test documentation snippets
+          command: yarn test:snippets
       - store_artifacts:
           path: coverage
       - store_test_results:
