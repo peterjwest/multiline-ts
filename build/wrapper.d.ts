@@ -1,2 +1,3 @@
-import multiline from './es5/index';
-export = multiline;
+import defaultImport, * as namedImports from './es5/index';
+declare const wrapper: typeof defaultImport & typeof namedImports;
+export = wrapper;
