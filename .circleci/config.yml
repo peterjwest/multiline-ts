@@ -211,5 +211,4 @@ workflows:
           filters:
             branches:
               only:
-                - master
-                - develop
+                - main

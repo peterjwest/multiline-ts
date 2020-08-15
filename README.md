@@ -138,5 +138,5 @@ const string = `Multiline string
 [circle-badge]: https://circleci.com/gh/peterjwest/multiline-ts.svg?style=shield
 [circle-url]: https://circleci.com/gh/peterjwest/multiline-ts
 
-[coverage-badge]: https://coveralls.io/repos/peterjwest/multiline-ts/badge.svg?branch=master&service=github
-[coverage-url]: https://coveralls.io/github/peterjwest/multiline-ts?branch=master
+[coverage-badge]: https://coveralls.io/repos/peterjwest/multiline-ts/badge.svg?branch=main&service=github
+[coverage-url]: https://coveralls.io/github/peterjwest/multiline-ts?branch=main
