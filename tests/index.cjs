@@ -1,6 +1,7 @@
+import { describe, it } from 'vitest';
 const assert = require('assert');
 
-const multiline = require('../build/wrapper');
+const multiline = require('../build/wrapper.cjs');
 
 describe('utils/multiline', () => {
   it('Returns a string indented correctly without leading/trailing newline', (() => {

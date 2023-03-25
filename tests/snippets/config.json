@@ -1,5 +1,5 @@
 {
-  "es6": { "extension": "mjs", "command": ["mocha"] },
-  "js": { "extension": "cjs", "command": ["mocha"] },
-  "ts": { "extension": "ts", "command": ["mocha", "--require", "ts-node/register"] }
+  "es6": { "extension": "mjs", "command": ["node"] },
+  "js": { "extension": "cjs", "command": ["node"] },
+  "ts": { "extension": "ts", "command": ["tsx"] }
 }

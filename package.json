@@ -2,13 +2,14 @@
   "name": "multiline-ts",
   "version": "2.2.0",
   "description": "Readable multiline template strings",
-  "main": "./build/wrapper.js",
+  "type": "module",
+  "main": "./build/wrapper.cjs",
   "exports": {
-    "import": "./build/es6/index.mjs",
-    "require": "./build/wrapper.js"
+    "import": "./build/es6/index.js",
+    "require": "./build/wrapper.cjs"
   },
   "engines": {
-    "node": ">=10"
+    "node": ">=14"
   },
   "repository": {
     "type": "git",
@@ -33,28 +34,25 @@
   "scripts": {
     "audit-dependencies": "yarn audit; [[ $? -ge 4 ]] && exit 1 || exit 0",
     "build": "yarn build:es6 && yarn build:es5",
-    "build:es6": "rm -rf build/es6 && tsc --project tsconfig-build-es6.json && convert-extension mjs build/es6",
+    "build:es6": "rm -rf build/es6 && tsc --project tsconfig-build-es6.json",
     "build:es5": "rm -rf build/es5 && tsc --project tsconfig-build-es5.json && convert-extension cjs build/es5",
     "lint:ts": "tslint --format verbose --project tsconfig.json",
-    "test:coverage": "rm -rf coverage && NODE_DEBUG=nyc nyc mocha 'tests/**/*.ts'",
-    "test:unit": "mocha --require ts-node/register 'tests/*.ts'",
-    "test:unit:es5": "mocha 'tests/*.cjs'",
-    "test:unit:es6": "mocha 'tests/*.mjs'",
+    "test:coverage": "vitest run --coverage",
+    "test:unit": "vitest run",
     "test:snippets": "test-snippets"
   },
   "dependencies": {},
   "devDependencies": {
-    "@types/mocha": "^8.2.2",
     "@types/node": "^15.6.1",
+    "@vitest/coverage-c8": "^0.29.7",
     "convert-extension": "^0.2.3",
-    "mocha": "^8.4.0",
-    "nyc": "^15.1.0",
     "sinon": "^11.1.1",
     "test-snippets": "^0.3.0",
-    "ts-node": "^9.1.1",
     "tslint": "^6.1.3",
     "tslint-eslint-rules": "^5.4.0",
+    "tsx": "^3.12.6",
     "typescript": "^4.3.2",
-    "typescript-tslint-plugin": "^1.0.1"
+    "typescript-tslint-plugin": "^1.0.1",
+    "vitest": "^0.29.7"
   }
 }

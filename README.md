@@ -11,7 +11,9 @@ multiline also indents multiline values in template variables.
 ```bash
 npm install multiline-ts
 ```
+
 or
+
 ```bash
 yarn add multiline-ts
 ```
@@ -130,7 +132,6 @@ const string = `Multiline string
   with varying
     indentation`;
 ```
-
 
 [npm-badge]: https://badge.fury.io/js/multiline-ts.svg
 [npm-url]: https://www.npmjs.com/package/multiline-ts
