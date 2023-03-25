@@ -37,7 +37,7 @@
     "build:es5": "rm -rf build/es5 && tsc --project tsconfig-build-es5.json && convert-extension cjs build/es5",
     "lint:ts": "tslint --format verbose --project tsconfig.json",
     "test:coverage": "rm -rf coverage && NODE_DEBUG=nyc nyc mocha 'tests/**/*.ts'",
-    "test:unit": "mocha --require ts-node/register 'tests/**/*.ts'",
+    "test:unit": "mocha --require ts-node/register 'tests/*.ts'",
     "test:unit:es5": "mocha 'tests/*.cjs'",
     "test:unit:es6": "mocha 'tests/*.mjs'",
     "test:snippets": "test-snippets"
