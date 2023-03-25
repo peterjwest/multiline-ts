@@ -1,10 +1,10 @@
-/** Gets the indent (in spaces) of a line */
+/** Gets the indent (in spaces and tabs) of a line */
 function getIndent(line: string) {
   const match = line.match(/^[ \t]+/);
   return match ? match[0] : '';
 }
 
-/** Gets the indent (in spaces) at the end of a string */
+/** Gets the indent (in spaces and tabs) at the end of a string */
 function getFinalIndent(value: string) {
   const match = value.match(/(?<=(\r\n|\r|\n))[ \t]+$/);
   return match ? match[0] : '';

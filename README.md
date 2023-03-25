@@ -36,7 +36,34 @@ const string = `Multiline string
 
 Which creates the string:
 
+```plaintext
+Multiline string
+  with varying
+    indentation
 ```
+
+### In indented code
+
+<!-- snippet: ts,es6 -->
+```js
+import multiline from 'multiline-ts';
+const condition1 = true;
+const condition2 = true;
+
+if (condition1) {
+  if (condition2) {
+    const string = multiline`
+      Multiline string
+        with varying
+          indentation
+    `;
+  }
+}
+```
+
+Creates the same string:
+
+```plaintext
 Multiline string
   with varying
     indentation
@@ -56,14 +83,13 @@ const string = multiline`
 `;
 ```
 
-Is equivalent to:
+Creates the string:
 
-<!-- snippet: ts,es6 -->
-```js
-const string = `Indented value:
+```plaintext
+Indented value:
   1
   2
-  3`;
+  3
 ```
 
 ### With with extra newlines
@@ -83,15 +109,14 @@ const string = multiline`
 `;
 ```
 
-Is equivalent to:
+Creates the string:
 
-<!-- snippet: ts,es6 -->
-```js
-const string = `
+```plaintext
+
   Here is
 Another string
     For you
-`;
+
 ```
 
 ### With CommonJS / require()
@@ -118,13 +143,12 @@ const string = multiline(`
 `);
 ```
 
-Is equivalent to:
+Creates the string:
 
-<!-- snippet: ts,es6 -->
-```js
-const string = `Multiline string
+```plaintext
+Multiline string
   with varying
-    indentation`;
+    indentation
 ```
 
 [npm-badge]: https://badge.fury.io/js/multiline-ts.svg
