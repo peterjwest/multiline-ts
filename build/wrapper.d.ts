@@ -1,3 +1,3 @@
-import defaultImport, * as namedImports from './es5/index';
+import defaultImport, * as namedImports from './code/index';
 declare const wrapper: typeof defaultImport & typeof namedImports;
 export = wrapper;

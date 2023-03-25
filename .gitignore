@@ -1,6 +1,5 @@
 /node_modules
-/build/es5
-/build/es6
+/build/code
 /coverage
 /tests/snippets/*
 !/tests/snippets/config.json

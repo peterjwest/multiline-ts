@@ -1,2 +1,2 @@
-const moduleImport = require('./es5/index.cjs');
+const moduleImport = require('./code/index.cjs');
 module.exports = Object.assign(moduleImport.default, moduleImport);

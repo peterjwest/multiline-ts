@@ -17,8 +17,7 @@
     "esModuleInterop": true
   },
   "include": [
-    "src/**/*.ts",
-    "tests/**/*.ts"
+    "**/*.ts"
   ],
   "exclude": [
     "tests/snippets/**"
