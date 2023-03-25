@@ -1,14 +1,3 @@
-/** Gets the minimum value in a list of numbers */
-function minimum(array: number[]) {
-  let minimum: number | undefined;
-  for (const item of array) {
-    if (minimum === undefined || item < minimum) {
-      minimum = item;
-    }
-  }
-  return minimum;
-}
-
 /** Gets the indent (in spaces) of a line */
 function getIndent(line: string) {
   const match = line.match(/^[ \t]+/);
@@ -42,8 +31,8 @@ export default function multiline(value: TemplateStringsArray | string, ...input
   }).join('').split(/\r\n|\r|\n/);
 
   // Find the minimum common indent
-  const minIndent = minimum(
-    lines.filter((line) => Boolean(line.match(/[^ \t]/)))
+  const minIndent = Math.min(
+    ...lines.filter((line) => Boolean(line.match(/[^ \t]/)))
     .map((line) => getIndent(line).length),
   );
 
