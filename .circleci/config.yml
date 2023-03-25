@@ -4,14 +4,14 @@ orbs:
   coveralls: coveralls/coveralls@1.0.6
 
 references:
-  yarn-cache-key-latest: &yarn-cache-key-latest
-    v1-dependency-yarn-{{ .Branch }}-{{ checksum "yarn.lock" }}-latest
-  yarn-cache-key: &yarn-cache-key
-    v1-dependency-yarn-{{ .Branch }}-{{ checksum "yarn.lock" }}
-  yarn-backup-cache-key: &yarn-backup-cache-key
-    v1-dependency-yarn-{{ .Branch }}-
-  yarn-backup-cache-key-no-branch: &yarn-backup-cache-key-no-branch
-    v1-dependency-yarn-
+  pnpm-cache-key-latest: &pnpm-cache-key-latest
+    v1-dependency-pnpm-{{ .Branch }}-{{ checksum "pnpm-lock.yaml" }}-latest
+  pnpm-cache-key: &pnpm-cache-key
+    v1-dependency-pnpm-{{ .Branch }}-{{ checksum "pnpm-lock.yaml" }}
+  pnpm-backup-cache-key: &pnpm-backup-cache-key
+    v1-dependency-pnpm-{{ .Branch }}-
+  pnpm-backup-cache-key-no-branch: &pnpm-backup-cache-key-no-branch
+    v1-dependency-pnpm-
 
   node-14: &node-14
     cimg/node:14.21.1
@@ -33,68 +33,69 @@ commands:
   install-dependencies:
     steps:
       - run:
-          name: Yarn version
-          command: yarn --version
+          name: PNPM version
+          command: pnpm --version
       - restore_cache:
+          name: Restore pnpm cache
           keys:
-            - *yarn-cache-key
-            - *yarn-backup-cache-key
-            - *yarn-backup-cache-key-no-branch
+            - *pnpm-cache-key
+            - *pnpm-backup-cache-key
+            - *pnpm-backup-cache-key-no-branch
       - run:
           name: Install dependencies
-          command: yarn install --frozen-lockfile
+          command: pnpm install
       - save_cache:
-          name: Save yarn package cache
-          key: *yarn-cache-key
+          name: Save pnpm cache
+          key: *pnpm-cache-key
           paths:
-            - ~/.cache/yarn
+            - node_modules
 
   install-dependencies-latest:
     steps:
       - run:
-          name: Yarn version
-          command: yarn --version
+          name: PNPM version
+          command: pnpm --version
       - restore_cache:
           keys:
-            - *yarn-cache-key-latest
-            - *yarn-cache-key
-            - *yarn-backup-cache-key
-            - *yarn-backup-cache-key-no-branch
+            - *pnpm-cache-key-latest
+            - *pnpm-cache-key
+            - *pnpm-backup-cache-key
+            - *pnpm-backup-cache-key-no-branch
       - run:
           name: Upgrade dependencies lockfile and install
-          command: yarn upgrade
+          command: pnpm update
       - run:
           name: Output dependencies diff
           command: git --no-pager diff
       - save_cache:
-          name: Save yarn package cache
-          key: *yarn-cache-key-latest
+          name: Save pnpm cache
+          key: *pnpm-cache-key-latest
           paths:
-            - ~/.cache/yarn
+            - node_modules
 
   checks:
     steps:
       - run:
           name: Lint Typescript code
-          command: yarn lint
+          command: pnpm lint
       - run:
           name: Audit production dependencies
-          command: yarn audit-dependencies
+          command: pnpm audit --prod
 
   build:
     steps:
       - run:
           name: Build project
-          command: yarn build
+          command: pnpm build
 
   tests:
     steps:
       - run:
           name: TS Unit tests
-          command: yarn test:coverage
+          command: pnpm test:coverage
       - run:
           name: Test documentation snippets
-          command: yarn test:snippets
+          command: pnpm test:snippets
       - store_artifacts:
           path: coverage
       - store_test_results:

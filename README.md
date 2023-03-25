@@ -12,12 +12,6 @@ multiline also indents multiline values in template variables.
 npm install multiline-ts
 ```
 
-or
-
-```bash
-yarn add multiline-ts
-```
-
 ## Usage
 
 <!-- snippet: ts,es6 -->
