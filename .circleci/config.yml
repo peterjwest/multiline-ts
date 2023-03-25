@@ -76,7 +76,7 @@ commands:
     steps:
       - run:
           name: Lint Typescript code
-          command: yarn lint:ts
+          command: yarn lint
       - run:
           name: Audit production dependencies
           command: yarn audit-dependencies
