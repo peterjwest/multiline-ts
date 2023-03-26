@@ -21,11 +21,11 @@ references:
     cimg/node:18.13.0
 
   node-14-latest: &node-14-latest
-    cimg/node:14
+    cimg/node:14.21
   node-16-latest: &node-16-latest
-    cimg/node:16
+    cimg/node:16.19
   node-18-latest: &node-18-latest
-    cimg/node:18
+    cimg/node:18.13
 
 
 
