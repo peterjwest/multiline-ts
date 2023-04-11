@@ -1,7 +1,7 @@
 import { describe, it } from 'vitest';
 import assert from 'assert';
 
-import multiline from '../build/es6/index.mjs';
+import multiline from '../build/code/index.js';
 
 describe('utils/multiline', () => {
   it('Returns a string indented correctly without leading/trailing newline', (() => {
