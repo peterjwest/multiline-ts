@@ -3,7 +3,7 @@
   "version": "3.0.0",
   "description": "Readable multiline template strings",
   "type": "module",
-  "main": "./build/wrapper.cjs",
+  "main": "./build/code/index.js",
   "exports": {
     "import": "./build/code/index.js",
     "require": "./build/wrapper.cjs"
