@@ -4,7 +4,7 @@ export default defineConfig({
   test: {
     include: [...configDefaults.include, 'tests/*.{js,cjs,ts}'],
     coverage: {
-      provider: 'c8',
+      provider: 'v8',
       include: [
         'src/**',
       ],
