@@ -41,8 +41,6 @@
     "preinstall": "npx only-allow pnpm"
   },
   "devDependencies": {
-    "@babel/core": "^7.24.9",
-    "@babel/eslint-parser": "^7.24.8",
     "@eslint/eslintrc": "^3.1.0",
     "@eslint/js": "^9.7.0",
     "@types/node": "^20.14.11",
