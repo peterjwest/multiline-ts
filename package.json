@@ -9,7 +9,7 @@
     "require": "./build/wrapper.cjs"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=18.18.0"
   },
   "repository": {
     "type": "git",
