@@ -81,6 +81,9 @@ commands:
       - run:
           name: Audit production dependencies
           command: pnpm audit --prod
+      - run:
+          name: Check for missing or unusued dependencies
+          command: pnpm lint:dependencies
 
   build:
     steps:
