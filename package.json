@@ -1,6 +1,6 @@
 {
   "name": "multiline-ts",
-  "version": "3.1.0",
+  "version": "4.0.0",
   "description": "Readable multiline template strings",
   "type": "module",
   "main": "./build/code/index.js",
