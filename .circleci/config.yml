@@ -4,8 +4,8 @@ orbs:
   coveralls: coveralls/coveralls@1.0.6
 
 references:
-  pnpm-cache-key-latest: &pnpm-cache-key-latest
-    v1-dependency-pnpm-{{ .Branch }}-{{ checksum "pnpm-lock.yaml" }}-latest
+  pnpm-cache-key-updated: &pnpm-cache-key-updated
+    v1-dependency-pnpm-{{ .Branch }}-{{ checksum "pnpm-lock.yaml" }}-updated
   pnpm-cache-key: &pnpm-cache-key
     v1-dependency-pnpm-{{ .Branch }}-{{ checksum "pnpm-lock.yaml" }}
   pnpm-backup-cache-key: &pnpm-backup-cache-key
@@ -13,21 +13,12 @@ references:
   pnpm-backup-cache-key-no-branch: &pnpm-backup-cache-key-no-branch
     v1-dependency-pnpm-
 
-  node-14: &node-14
-    cimg/node:14.21.1
-  node-16: &node-16
-    cimg/node:16.19.0
-  node-18: &node-18
-    cimg/node:18.13.0
-
-  node-14-latest: &node-14-latest
-    cimg/node:14.21
-  node-16-latest: &node-16-latest
-    cimg/node:16.19
-  node-18-latest: &node-18-latest
-    cimg/node:18.13
-
-
+  node-old: &node-old
+    cimg/node:18.20.4
+  node-mid: &node-mid
+    cimg/node:20.15.1
+  node-new: &node-new
+    cimg/node:22.4.1
 
 commands:
   install-dependencies:
@@ -50,14 +41,14 @@ commands:
           paths:
             - node_modules
 
-  install-dependencies-latest:
+  install-dependencies-updated:
     steps:
       - run:
           name: PNPM version
           command: pnpm --version
       - restore_cache:
           keys:
-            - *pnpm-cache-key-latest
+            - *pnpm-cache-key-updated
             - *pnpm-cache-key
             - *pnpm-backup-cache-key
             - *pnpm-backup-cache-key-no-branch
@@ -69,7 +60,7 @@ commands:
           command: git --no-pager diff
       - save_cache:
           name: Save pnpm cache
-          key: *pnpm-cache-key-latest
+          key: *pnpm-cache-key-updated
           paths:
             - node_modules
 
@@ -107,33 +98,33 @@ commands:
 jobs:
   checks:
     docker:
-      - image: *node-18
+      - image: *node-old
     steps:
       - checkout
       - install-dependencies
       - checks
 
-  test-node-14:
+  test-node-old:
     docker:
-      - image: *node-14
+      - image: *node-old
     steps:
       - checkout
       - install-dependencies
       - build
       - tests
 
-  test-node-16:
+  test-node-mid:
     docker:
-      - image: *node-16
+      - image: *node-mid
     steps:
       - checkout
       - install-dependencies
       - build
       - tests
 
-  test-node-18:
+  test-node-new:
     docker:
-      - image: *node-18
+      - image: *node-new
     steps:
       - checkout
       - install-dependencies
@@ -141,38 +132,38 @@ jobs:
       - tests
       - coveralls/upload
 
-  checks-latest:
+  checks-updated:
     docker:
-      - image: *node-18
+      - image: *node-old
     steps:
       - checkout
-      - install-dependencies-latest
+      - install-dependencies-updated
       - checks
 
-  test-node-14-latest:
+  test-node-old-updated:
     docker:
-      - image: *node-14-latest
+      - image: *node-old
     steps:
       - checkout
-      - install-dependencies-latest
+      - install-dependencies-updated
       - build
       - tests
 
-  test-node-16-latest:
+  test-node-mid-updated:
     docker:
-      - image: *node-16-latest
+      - image: *node-mid
     steps:
       - checkout
-      - install-dependencies-latest
+      - install-dependencies-updated
       - build
       - tests
 
-  test-node-18-latest:
+  test-node-new-updated:
     docker:
-      - image: *node-18-latest
+      - image: *node-new
     steps:
       - checkout
-      - install-dependencies-latest
+      - install-dependencies-updated
       - build
       - tests
 
@@ -181,16 +172,21 @@ workflows:
   test:
     jobs:
       - checks
-      - test-node-14
-      - test-node-16
-      - test-node-18
+      - test-node-old
+      - test-node-mid
+      - test-node-new
+      - checks-updated
+      - test-node-old-updated
+      - test-node-mid-updated
+      - test-node-new-updated
 
   weekly:
     jobs:
-      - checks-latest
-      - test-node-14-latest
-      - test-node-16-latest
-      - test-node-18-latest
+      - checks
+      - checks-updated
+      - test-node-old-updated
+      - test-node-mid-updated
+      - test-node-new-updated
     triggers:
       - schedule:
           # Midnight on Sunday
