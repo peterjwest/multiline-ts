@@ -1,1 +1,1 @@
-ignores: ["@vitest/coverage-v8"]
+ignores: ["@vitest/coverage-v8", "tsx"]

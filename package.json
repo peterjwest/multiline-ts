@@ -52,6 +52,7 @@
     "only-allow": "^1.2.1",
     "test-snippets": "^1.0.0",
     "tsup": "^8.2.2",
+    "tsx": "^4.16.2",
     "typescript": "^5.5.3",
     "vitest": "^2.0.4"
   }
