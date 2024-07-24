@@ -2,9 +2,9 @@
 
 Readable multi-line template strings for Javascript or Typescript.
 
-multiline is a template tag function which removes leading indentation from a string, and the first/last newline, to allow it to be more readable in code.
+multiline is a template tag function which removes leading indentation from each line of a string, and the first/last newline, to allow it to be more readable in code.
 
-multiline also indents multiline values in template variables.
+multiline also indents multi-line strings in template variables.
 
 ## Installation
 
@@ -125,12 +125,17 @@ If you want to use this with CommonJS imports use the following syntax:
 
 <!-- snippet: js -->
 ```js
-const multiline = require('multiline-ts').default;
+const multiline = require('multiline-ts');
+const string = multiline(`
+  Multiline string
+    with varying
+      indentation
+`);
 ```
 
 ### As a function
 
-You can also call multiline as a normal function, however this will not be able to indent template variables.
+You can also call multiline as a normal function, however this will not be able to intelligently indent multi-line template variables.
 
 <!-- snippet: ts,es6 -->
 ```js
