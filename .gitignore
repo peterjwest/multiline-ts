@@ -1,7 +1,3 @@
 /node_modules
 /build/code
 /coverage
-/tests/snippets/*
-!/tests/snippets/config.json
-!/tests/snippets/tsconfig.json
-!/tests/snippets/vite.config.ts
