@@ -14,7 +14,7 @@ npm install multiline-ts
 
 ## Usage
 
-<!-- snippet: ts,es6 -->
+<!-- snippet: ts,js -->
 ```js
 import multiline from 'multiline-ts';
 
@@ -27,7 +27,7 @@ const string = multiline`
 
 Is equivalent to:
 
-<!-- snippet: ts,es6 -->
+<!-- snippet: ts,js -->
 ```js
 const string = `Multiline string
   with varying
@@ -44,7 +44,7 @@ Multiline string
 
 ### In indented code
 
-<!-- snippet: ts,es6 -->
+<!-- snippet: ts,js -->
 ```js
 import multiline from 'multiline-ts';
 const condition1 = true;
@@ -71,7 +71,7 @@ Multiline string
 
 ### With template variables
 
-<!-- snippet: ts,es6 -->
+<!-- snippet: ts,js -->
 ```js
 import multiline from 'multiline-ts';
 
@@ -96,7 +96,7 @@ Indented value:
 
 Extra newlines are respected:
 
-<!-- snippet: ts,es6 -->
+<!-- snippet: ts,js -->
 ```js
 import multiline from 'multiline-ts';
 
@@ -123,7 +123,7 @@ Another string
 
 If you want to use this with CommonJS imports use the following syntax:
 
-<!-- snippet: js -->
+<!-- snippet: cjs -->
 ```js
 const multiline = require('multiline-ts');
 const string = multiline(`
@@ -137,7 +137,7 @@ const string = multiline(`
 
 You can also call multiline as a normal function, however this will not be able to intelligently indent multi-line template variables.
 
-<!-- snippet: ts,es6 -->
+<!-- snippet: ts,js -->
 ```js
 import multiline from 'multiline-ts';
 
