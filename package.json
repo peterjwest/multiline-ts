@@ -43,20 +43,20 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.1.0",
-    "@eslint/js": "^9.7.0",
+    "@eslint/js": "^9.8.0",
     "@total-typescript/ts-reset": "^0.5.1",
-    "@types/node": "^20.14.11",
-    "@typescript-eslint/eslint-plugin": "^7.16.1",
-    "@typescript-eslint/parser": "^7.16.1",
-    "@vitest/coverage-v8": "^2.0.4",
+    "@types/node": "^22.1.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.1",
+    "@typescript-eslint/parser": "^8.0.1",
+    "@vitest/coverage-v8": "^2.0.5",
     "depcheck": "^1.4.7",
-    "eslint": "^9.7.0",
+    "eslint": "^9.8.0",
     "only-allow": "^1.2.1",
     "test-snippets": "^2.0.0",
-    "tsup": "^8.2.2",
-    "tsx": "^4.16.2",
-    "typescript": "^5.5.3",
+    "tsup": "^8.2.4",
+    "tsx": "^4.17.0",
+    "typescript": "^5.5.4",
     "unlinted": "^2.0.0",
-    "vitest": "^2.0.4"
+    "vitest": "^2.0.5"
   }
 }
