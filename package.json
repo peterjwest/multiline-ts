@@ -39,7 +39,8 @@
     "test:coverage": "vitest run --coverage",
     "test:unit": "vitest run",
     "test:snippets": "test-snippets",
-    "preinstall": "npx only-allow pnpm"
+    "preinstall": "npx only-allow pnpm",
+    "prepublish": "pnpm install && pnpm build"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.1.0",
